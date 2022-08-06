@@ -30,13 +30,17 @@ public class AuthController {
 	@PostMapping("login")
 	public ResponseEntity<?>login(@RequestBody AuthCredentialsRequest request){
 		try {
+			
+			//it makes token from request and verify if the username and password matches with userdetail
+			//service
             Authentication authenticate = authenticationManager
                 .authenticate(
                     new UsernamePasswordAuthenticationToken(
                         request.getUsername(), request.getPassword()
                     )
                 );
-
+            
+            //get all the details of user present in authentication token
             User user = (User) authenticate.getPrincipal();
             user.setPassword(null);
 
