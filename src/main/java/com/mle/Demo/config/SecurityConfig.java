@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.ForwardedHeaderFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.mle.Demo.filter.JwtFilter;
 import com.mle.Demo.util.CustomPasswordEncoder;
@@ -57,6 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/api/auth/**").permitAll()
 			.antMatchers("/api/auth/**").permitAll()
+			.antMatchers("/v3/api-docs").permitAll()
+			.antMatchers("/swagger-ui/**").permitAll()
+            .antMatchers("/swagger-resources/**").permitAll()
+            .antMatchers("/swagger-ui.html").permitAll()
 			.anyRequest()
 			.authenticated();
 		
@@ -66,6 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		
 		return new BCryptPasswordEncoder();
+	}
+	@Bean
+	ForwardedHeaderFilter forwardedHeaderFilter() {
+	   return new ForwardedHeaderFilter();
 	}
 
 }
