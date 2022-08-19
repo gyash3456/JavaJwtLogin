@@ -15,7 +15,7 @@ function App() {
         "username":"yash1",
         "password":"hello"
       }
-      console.log("Hello")
+      // console.log("Hello")
       fetch('api/auth/login',{
         headers:{
           "Content-Type":"application/json"

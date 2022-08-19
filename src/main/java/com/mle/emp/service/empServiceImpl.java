@@ -16,12 +16,15 @@ import com.mle.emp.exception.*;
 import com.mle.emp.repository.UserRepository;
 import com.mle.emp.repository.empRepo;
 import com.mle.emp.service.empService;
+import com.mle.emp.util.CustomPasswordEncoder;
 
 import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class empServiceImpl implements empService {
 	
+	@Autowired
+	private CustomPasswordEncoder passwordEncoder;
 	@Autowired
      private empRepo empRepo ;
 	
@@ -46,11 +49,16 @@ public class empServiceImpl implements empService {
 			
 		}
 		else {
-			savedEmployee =this.empRepo.save(employee);
+			
 			this.user.setUsername(user_id);
-			this.user.setPassword(user_pass);
-			this.userRepo.save(user);
-
+			this.user.setPassword(passwordEncoder.getPasswordEncoder().encode(user_pass));
+			//this.user.setEmployee(employee);
+	employee.setUser(this.user);
+			
+	this.userRepo.save(this.user);
+			savedEmployee =this.empRepo.save(employee);
+			
+			
 		}
 		
 		return employeetoDto(savedEmployee);
