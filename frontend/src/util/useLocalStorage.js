@@ -10,7 +10,8 @@ function useLocalState(defaultValue,key){
     useEffect(()=>{
         localStorage.setItem(key,JSON.stringify(value));
     })
-    return[value, setValue]
+    return[value, setValue]//this setValue comes from useState
+    //and useEffect changes when the value when new localstorage is set.
 
 }
 export {useLocalState};
