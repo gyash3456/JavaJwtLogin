@@ -63,7 +63,14 @@ public class User implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		ArrayList<GrantedAuthority> roles = new ArrayList<>();
-		roles.add(new Authority("ROLE_STUDENT"));
+		System.out.println(this.username+"+"+username);
+		if(this.username.equals("vikas.rawat@mlesystems.com")) {
+			roles.add(new Authority("ADMIN"));
+//			System.out.println("your are in admin");
+		}
+		else {
+			roles.add(new Authority("USER"));
+		}
 		return roles;
 	}
 	@Override
