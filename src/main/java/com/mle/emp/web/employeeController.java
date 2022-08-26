@@ -21,7 +21,7 @@ import com.mle.emp.dto.empDto;
 import com.mle.emp.service.empService;
 
 @RestController
-@RequestMapping("/api/auth/admin")
+@RequestMapping("/landingpage/admin")
 public class employeeController {
 
 	@Autowired

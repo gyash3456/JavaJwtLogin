@@ -43,7 +43,7 @@ public class empServiceImpl implements empService {
 		
 		
 		 Optional<Employee> emp=this.empRepo.findByEmail(user_id);
-
+	
 		if(emp.isPresent()) {
 			throw(new ResourceAlreadyPresentException("Employee",user_id));
 			
