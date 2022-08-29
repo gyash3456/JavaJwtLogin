@@ -33,6 +33,7 @@ public class employeeController {
 	public ResponseEntity<empDto> create_emp(@RequestBody empDto empDto1 )
 	{
 		empDto createdempDto=this.empService.createEmployee(empDto1);
+		
 		return new ResponseEntity<>(createdempDto, HttpStatus.CREATED);
 	}
 	

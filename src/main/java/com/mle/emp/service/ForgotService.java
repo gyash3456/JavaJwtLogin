@@ -8,8 +8,9 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mle.emp.domain.ForgotEntity;
-import com.mle.emp.repository.ForgotRepository;
+import com.mle.emp.domain.User;
+import com.mle.emp.repository.UserRepository;
+import com.mle.emp.util.CustomPasswordEncoder;
 
 @Service
 public class ForgotService {
@@ -17,30 +18,32 @@ public class ForgotService {
 	private static final long EXPIRE_TOKEN_AFTER_MINUTES = 30;
 
 	@Autowired
-	private ForgotRepository forgotRepository;
+	private CustomPasswordEncoder passwordEncoder;
+	@Autowired
+	private UserRepository UserRepository;
 
-	public String forgotPassword(String email) {
+	public String forgotPassword(String username) {
 
-		Optional<ForgotEntity> userOptional = Optional
-				.ofNullable(forgotRepository.findByEmail(email));
+		Optional<User> userOptional = Optional
+				.ofNullable(UserRepository.findByusername(username));
 
 		if (!userOptional.isPresent()) {
-			return "Invalid email id.";
+			return "Invalid username id.";
 		}
 
-		ForgotEntity forgotEntity = userOptional.get();
-		forgotEntity.setToken(generateToken());
-		forgotEntity.setTokenCreationDate(LocalDateTime.now());
+		User User = userOptional.get();
+		User.setToken(generateToken());
+		User.setTokenCreationDate(LocalDateTime.now());
 
-		forgotEntity = forgotRepository.save(forgotEntity);
+		User = UserRepository.save(User);
 
-		return forgotEntity.getToken();
+		return User.getToken();
 	}
 
 	public String resetPassword(String token, String password) {
 
-		Optional<ForgotEntity> userOptional = Optional
-				.ofNullable(forgotRepository.findByToken(token));
+		Optional<User> userOptional = Optional
+				.ofNullable(UserRepository.findByToken(token));
 
 		if (!userOptional.isPresent()) {
 			return "Invalid token.";
@@ -53,13 +56,13 @@ public class ForgotService {
 
 		}
 
-		ForgotEntity forgotEntity = userOptional.get();
+		User User = userOptional.get();
 
-		forgotEntity.setPassword(password);
-		forgotEntity.setToken(null);
-		forgotEntity.setTokenCreationDate(null);
+		User.setPassword(passwordEncoder.getPasswordEncoder().encode(password));
+		User.setToken(null);
+		User.setTokenCreationDate(null);
 
-		forgotRepository.save(forgotEntity);
+		UserRepository.save(User);
 
 		return "Your password successfully updated.";
 	}

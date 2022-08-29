@@ -1,11 +1,13 @@
 package com.mle.emp.domain;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,16 +28,53 @@ public class User implements UserDetails{
 	private Long id;
 	private String username;
 	private String password;
-	@OneToOne
-	private Employee employee;
 	
-	
-	public Employee getEmployee() {
-		return employee;
+	private String token;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime tokenCreationDate;
+//	private String email;
+//	public String getEmail() {
+//		return email;
+//	}
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+	public String getToken() {
+		return token;
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setToken(String token) {
+		this.token = token;
 	}
+	public LocalDateTime getTokenCreationDate() {
+		return tokenCreationDate;
+	}
+	public void setTokenCreationDate(LocalDateTime tokenCreationDate) {
+		this.tokenCreationDate = tokenCreationDate;
+	}
+	public User(Long id, String username, String password, String token, LocalDateTime tokenCreationDate,
+			Employee employee) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.token = token;
+		this.tokenCreationDate = tokenCreationDate;
+		//this.employee = employee;
+	}
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+//	@OneToOne
+//	private Employee employee;
+//	
+//	
+//	public Employee getEmployee() {
+//		return employee;
+//	}
+//	public void setEmployee(Employee employee) {
+//		this.employee = employee;
+//	}
 	public Long getId() {
 		return id;
 	}

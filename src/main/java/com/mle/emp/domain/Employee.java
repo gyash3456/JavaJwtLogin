@@ -1,5 +1,6 @@
 package com.mle.emp.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,8 @@ public class Employee {
 	
 	@Column(nullable = false, length=100)
 	private String password;
-	
+
+	//	(cascade=CascadeType.ALL)
 	@OneToOne
 	private User user;
 			
@@ -313,13 +315,25 @@ public class Employee {
 
 
 
+	@Override
+	public String toString() {
+		return "Employee [emp_id=" + emp_id + ", password=" + password + ",  firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", date_of_birth="
+				+ date_of_birth + ", mobile=" + mobile + ", aadhar=" + aadhar + ", pan_no=" + pan_no + ", address="
+				+ address + ", joining_date=" + joining_date + ", account_no=" + account_no + ", designation="
+				+ designation + ", ifsc_code=" + ifsc_code + ", bank_name=" + bank_name + ", blood_group=" + blood_group
+				+ "]";
+	}
+
+
+
 
 
 	
 	
 //	@Lob
 //	private byte[] profile_photo;
-//	
+	
 	
 	
 	

@@ -8,5 +8,9 @@ import com.mle.emp.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User>findByUsername(String username);
+	User findByusername(String username);
 
+	User findByToken(String token);
+
+//User findByEmail(String username);
 }

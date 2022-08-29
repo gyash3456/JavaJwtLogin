@@ -1,5 +1,10 @@
 package com.mle.emp.service;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+//import java.lang.module.Configuration;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,10 +39,15 @@ public class empServiceImpl implements empService {
      
 	@Override
 	public empDto createEmployee(empDto empDto1)
-	{   String user_id=empDto1.getEmail();
+	{  
+//		Configuration cfg = new Configuration();
+//		cfg.configure ();
+//		SessionFactory factory=cfg.buildSessionFactory();		
+		
+		String user_id=empDto1.getEmail();
 		String user_pass= empDto1.getPassword();
 
-	Employee savedEmployee;
+	     Employee savedEmployee;
 	
 		Employee employee=this.dtoToEmployee(empDto1);
 		
@@ -49,18 +59,13 @@ public class empServiceImpl implements empService {
 			
 		}
 		else {
-			
 			this.user.setUsername(user_id);
-			this.user.setPassword(passwordEncoder.getPasswordEncoder().encode(user_pass));
-			//this.user.setEmployee(employee);
-	employee.setUser(this.user);
-			
-	this.userRepo.save(this.user);
-			savedEmployee =this.empRepo.save(employee);
-			
-			
-		}
-		
+            this.user.setPassword(passwordEncoder.getPasswordEncoder().encode(user_pass));
+            this.userRepo.save(this.user);
+            employee.setUser(this.user);
+            
+            savedEmployee =empRepo.save(employee);
+		}		
 		return employeetoDto(savedEmployee);
 		
 		
