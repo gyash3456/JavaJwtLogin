@@ -7,11 +7,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -65,7 +68,8 @@ public class User implements UserDetails{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-//	@OneToOne
+//	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+//	@JoinColumn(name="EMP_ID",insertable=false,updatable=false)
 //	private Employee employee;
 //	
 //	

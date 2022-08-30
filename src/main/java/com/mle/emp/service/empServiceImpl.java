@@ -4,6 +4,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.awt.Image;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 //import java.lang.module.Configuration;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +16,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
 import com.mle.emp.domain.Employee;
@@ -34,9 +42,13 @@ public class empServiceImpl implements empService {
      private empRepo empRepo ;
 	
 	private User user=new User();
+	
+	//private User user=new User();
 	@Autowired
 	private UserRepository userRepo;
-     
+ 
+//	public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/static/imgdata";
+//	,MultipartFile file
 	@Override
 	public empDto createEmployee(empDto empDto1)
 	{  
@@ -59,12 +71,22 @@ public class empServiceImpl implements empService {
 			
 		}
 		else {
+			//savedEmployee =empRepo.save(employee);
 			this.user.setUsername(user_id);
             this.user.setPassword(passwordEncoder.getPasswordEncoder().encode(user_pass));
+           // this.user.setEmployee(savedEmployee);
             this.userRepo.save(this.user);
             employee.setUser(this.user);
             
-            savedEmployee =empRepo.save(employee);
+//            employee.setImage(file.getOriginalFilename());
+//            File savefile= new ClassPathResource("static/img").getFile();
+//            
+//           Path path= Paths.get(savefile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+//            
+//            Files.copy(file.getInputStream(),l, null);
+           savedEmployee =empRepo.save(employee);
+            
+            
 		}		
 		return employeetoDto(savedEmployee);
 		
@@ -94,6 +116,7 @@ public class empServiceImpl implements empService {
 	    emp.setBank_name(empDto1.getBank_name());
 	    emp.setDesignation(empDto1.getDesignation());
 	    emp.setBlood_group(empDto1.getBlood_group());
+	   // emp.setImage(empDto1.getImage());
 	 Employee updatedEmployee=this.empRepo.save(emp);
 	 
 	 empDto empDto2=this.employeetoDto(updatedEmployee);
@@ -140,6 +163,7 @@ public class empServiceImpl implements empService {
 	    emp.setBank_name(empDto1.getBank_name());
 	    emp.setDesignation(empDto1.getDesignation());
 	    emp.setBlood_group(empDto1.getBlood_group());
+	   // emp.setImage(empDto1.getImage());
 	    return emp;
 	}
 	
@@ -164,6 +188,7 @@ public class empServiceImpl implements empService {
 	    empDto1.setBank_name(emp.getBank_name());
 	    empDto1.setDesignation(emp.getDesignation());
 	    empDto1.setBlood_group(emp.getBlood_group());
+	   // empDto1.setImage(emp.getImage());
 		return empDto1;
 	}
 

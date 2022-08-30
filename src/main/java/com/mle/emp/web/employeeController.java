@@ -1,5 +1,9 @@
 package com.mle.emp.web;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mle.emp.dto.apiResponse;
 import com.mle.emp.dto.empDto;
@@ -27,11 +33,22 @@ public class employeeController {
 	@Autowired
 	private empService empService;
 	
-	
+	public static String uploadDirectory=System.getProperty("user.dir")+"/src/main/static/imgdata";
 	// POST-create user
 	@PostMapping("/")
-	public ResponseEntity<empDto> create_emp(@RequestBody empDto empDto1 )
+//	@RequestParam("finename") MultipartFile file
+	public ResponseEntity<empDto> create_emp(@RequestBody empDto empDto1)
 	{
+//		StringBuilder fileName = new StringBuilder();
+//		String filename1= file.getOriginalFilename();
+//		Path fileNameAndPath=Paths.get(uploadDirectory,filename1);
+//		try {
+//			Files.write(fileNameAndPath,file.getBytes());
+//		} catch (IOException e) {
+//			
+//			e.printStackTrace();
+//		}
+//		,file
 		empDto createdempDto=this.empService.createEmployee(empDto1);
 		
 		return new ResponseEntity<>(createdempDto, HttpStatus.CREATED);

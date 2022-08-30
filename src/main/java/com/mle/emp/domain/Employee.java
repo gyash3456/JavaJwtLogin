@@ -35,9 +35,9 @@ public class Employee {
 	@Column(nullable = false, length=100)
 	private String password;
 
+	
 	//	(cascade=CascadeType.ALL)
-	@OneToOne
-	private User user;
+	
 			
 	@Column(name = "first_name")
 	private String firstName;
@@ -88,6 +88,16 @@ public class Employee {
 	@Column(name="blood_group")
 	private String blood_group;
 	
+	
+//	@Column(name = "image_name")
+//	private String image_name;
+//
+//	@Column(name = "type")
+//	private String type;
+//
+//	@Column(name = "image", unique = false, nullable = false, length = 100000)
+//	private byte[] image;
+
 	public String getBlood_group() {
 		return blood_group;
 	}
@@ -300,7 +310,8 @@ public class Employee {
 	}
 
 
-
+	@OneToOne
+	private User user;
 
 
 	public User getUser() {
@@ -313,6 +324,7 @@ public class Employee {
 		this.user = user;
 	}
 
+	
 
 
 	@Override
@@ -324,6 +336,18 @@ public class Employee {
 				+ designation + ", ifsc_code=" + ifsc_code + ", bank_name=" + bank_name + ", blood_group=" + blood_group
 				+ "]";
 	}
+
+//	private String image;
+//
+//	public String getImage() {
+//		return image;
+//	}
+//
+//
+//
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
 
 
 

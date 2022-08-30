@@ -174,7 +174,16 @@ public class empDto {
 		this.blood_group = blood_group;
 	}
 	
-	
+//	public String getImage() {
+//		return image;
+//	}
+//
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
+
+
+	//private String image;
 	
 	
 }

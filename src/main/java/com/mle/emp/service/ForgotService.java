@@ -6,11 +6,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import com.mle.emp.domain.User;
 import com.mle.emp.repository.UserRepository;
 import com.mle.emp.util.CustomPasswordEncoder;
+import com.mle.emp.service.EmailSenderService;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ForgotService {
@@ -22,6 +28,9 @@ public class ForgotService {
 	@Autowired
 	private UserRepository UserRepository;
 
+	@Autowired
+	private EmailSenderService senderService;
+	
 	public String forgotPassword(String username) {
 
 		Optional<User> userOptional = Optional
@@ -36,7 +45,12 @@ public class ForgotService {
 		User.setTokenCreationDate(LocalDateTime.now());
 
 		User = UserRepository.save(User);
-
+		String rcv=User.getUsername();
+		System.out.println(rcv);
+		String tkn=User.getToken();
+//	      sendEmail();
+		senderService.sendEmail(rcv, "Reset Password", "Your reset password token is ->"+tkn);
+//		senderService.sendEmail("hansa.saini@mlesystems.com", "Reset Passwprd", "Body of Message");
 		return User.getToken();
 	}
 
@@ -63,6 +77,7 @@ public class ForgotService {
 		User.setTokenCreationDate(null);
 
 		UserRepository.save(User);
+		//sendEmail();
 
 		return "Your password successfully updated.";
 	}
@@ -93,5 +108,11 @@ public class ForgotService {
 
 		return diff.toMinutes() >= EXPIRE_TOKEN_AFTER_MINUTES;
 	}
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void sendEmail() {
+////		senderService.sendEmail("geet.saini27pics@gmail.com", "Reset Passwprd", "Body of Message");
+//		
+//		senderService.sendEmail("hansa.saini@mlesystems.com", "Reset Passwprd", "Body of Message");
+//	}
 
 }
