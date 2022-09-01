@@ -48,8 +48,10 @@ public class ForgotService {
 		String rcv=User.getUsername();
 		System.out.println(rcv);
 		String tkn=User.getToken();
+		String link1="http://localhost:3000/resetpassword/"+tkn;
+		System.out.println(link1);
 //	      sendEmail();
-		senderService.sendEmail(rcv, "Reset Password", "Your reset password token is ->"+tkn);
+		senderService.sendEmail(rcv, "Reset Password", link1);
 //		senderService.sendEmail("hansa.saini@mlesystems.com", "Reset Passwprd", "Body of Message");
 		return User.getToken();
 	}

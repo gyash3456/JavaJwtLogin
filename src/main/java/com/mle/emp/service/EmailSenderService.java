@@ -18,7 +18,6 @@ public class EmailSenderService {
 		
 //try {
 	SimpleMailMessage message=new SimpleMailMessage();
-	message.setFrom("no-reply@example.com");
 	message.setTo(toEmail);
 	message.setSubject(subject);
 	message.setText(body);
