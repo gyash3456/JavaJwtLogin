@@ -35,7 +35,7 @@ public class empDto {
 	
 	private String password;
 	
-	private String firstName;
+	private String first_name;
 	
 	private String lastName;
 	private String email;
@@ -48,12 +48,12 @@ public class empDto {
 	private String address;
 	private String blood_group;
 	//private String joining_date;
-	public String getFirstName() {
-		return firstName;
+	public String getfirst_name() {
+		return first_name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setfirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
 	public String getLastName() {

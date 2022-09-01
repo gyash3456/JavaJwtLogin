@@ -1,5 +1,6 @@
 package com.mle.emp.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,12 +34,12 @@ public class Employee {
 	
 	@Column(nullable = false, length=100)
 	private String password;
-	
+//	(cascade=CascadeType.ALL)
 	@OneToOne
 	private User user;
 			
 	@Column(name = "first_name")
-	private String firstName;
+	private String first_name;
 	
 	@Column(name = "last_name")
 	private String lastName;
@@ -123,13 +124,13 @@ public class Employee {
 
 
 	public String getFirstName() {
-		return firstName;
+		return first_name;
 	}
 
 
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.first_name = firstName;
 	}
 
 

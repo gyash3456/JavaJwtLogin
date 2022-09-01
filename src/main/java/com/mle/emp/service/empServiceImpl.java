@@ -73,7 +73,7 @@ public class empServiceImpl implements empService {
 	public empDto updateEmployee(empDto empDto1, Integer emp_id) {
 	 Employee emp=this.empRepo.findById(emp_id).orElseThrow(()->new ResourceNotFoundException("Employee","Id",emp_id));
 	    emp.setPassword(empDto1.getPassword());
-	    emp.setFirstName(empDto1.getFirstName());
+	    emp.setFirstName(empDto1.getfirst_name());
 		emp.setLastName(empDto1.getLastName());
 	    emp.setPassword(empDto1.getPassword());
 	    emp.setEmail(empDto1.getEmail());
@@ -119,7 +119,7 @@ public class empServiceImpl implements empService {
 	{
 		Employee emp  =new Employee();
 		emp.setEmp_id(empDto1.getEmp_id());
-		emp.setFirstName(empDto1.getFirstName());
+		emp.setFirstName(empDto1.getfirst_name());
 		emp.setLastName(empDto1.getLastName());
 	    emp.setPassword(empDto1.getPassword());
 	    emp.setEmail(empDto1.getEmail());
@@ -143,7 +143,7 @@ public class empServiceImpl implements empService {
 		empDto empDto1 =new empDto();
 		empDto1.setEmp_id(emp.getEmp_id());		
 	    empDto1.setPassword(emp.getPassword());
-	    empDto1.setFirstName(emp.getFirstName());
+	    empDto1.setfirst_name(emp.getFirstName());
 		empDto1.setLastName(emp.getLastName());
 	    
 	    empDto1.setEmail(emp.getEmail());

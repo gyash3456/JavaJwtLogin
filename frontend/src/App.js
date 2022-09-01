@@ -12,7 +12,7 @@ function App() {
 
     if(!jwt){
       const reqBody={
-        "username":"yash1",
+        "username":"vikas.rawat@mlesystems.com",
         "password":"hello"
       }
       // console.log("Hello")
@@ -24,8 +24,11 @@ function App() {
         body:JSON.stringify(reqBody)
       }).then((response)=>Promise.all([response.json(),response.headers]))
       .then(([body,headers])=>{
+
+        console.log("value is"+headers.get("authorization"));
         setJwt(headers.get("authorization"));
-        console.log(jwt);
+        
+        // console.log(jwt);
         // console.log(body);
       }); 
     }
