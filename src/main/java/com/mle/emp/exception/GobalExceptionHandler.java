@@ -13,7 +13,7 @@ public class GobalExceptionHandler {
      @ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<apiResponse> resourceNotEntityFoundExceptionHandler(ResourceNotFoundException ex){
 		String message=ex.getMessage();
-//		System.out.println("in global exception");
+//		
 		apiResponse apiResponse1=new apiResponse(message,false);
 		return new ResponseEntity<apiResponse>(apiResponse1,HttpStatus.NOT_FOUND);
 	}
@@ -21,6 +21,7 @@ public class GobalExceptionHandler {
 	 @ExceptionHandler(ResourceAlreadyPresentException.class)
 		public ResponseEntity<apiResponse> resourceAlreadyFoundExceptionHandler(ResourceAlreadyPresentException ex){
 			String message=ex.getMessage();
+			System.out.println("in thosr");
 			apiResponse apiResponse1=new apiResponse(message,false);
 			return new ResponseEntity<apiResponse>(apiResponse1,HttpStatus.NOT_FOUND);
 		}

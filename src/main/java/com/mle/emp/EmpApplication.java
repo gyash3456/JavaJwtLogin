@@ -29,7 +29,21 @@ public class EmpApplication {
 ////			senderService.sendEmail("geet.saini27pics@gmail.com", "Reset Passwprd", "Body of Message");
 //			
 //			senderService.sendEmail("hansa.saini@mlesystems.com", "Reset Passwprd", "Body of Message");
-//		}
+	}
 	
-
-}
+//=======
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
+//
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//
+//@SpringBootApplication
+//
+//public class EmpApplication {
+//
+//	public static void main(String[] args) {
+//		SpringApplication.run(EmpApplication.class, args);
+//	}
+//>>>>>>> affc586a1893519155ac66a3b42b82ef1eef986f
+//
+//}
