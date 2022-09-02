@@ -33,15 +33,16 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer emp_id;
 	
+	
+	
 	@Column(nullable = false, length=100)
 	private String password;
 
-	
-	//	(cascade=CascadeType.ALL)
+//	(cascade=CascadeType.ALL)
 	
 			
 	@Column(name = "first_name")
-	private String firstName;
+	private String first_name;
 	
 	@Column(name = "last_name")
 	private String lastName;
@@ -136,13 +137,13 @@ public class Employee {
 
 
 	public String getFirstName() {
-		return firstName;
+		return first_name;
 	}
 
 
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.first_name = firstName;
 	}
 
 
@@ -330,13 +331,37 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [emp_id=" + emp_id + ", password=" + password + ",  firstName=" + firstName
+		return "Employee [emp_id=" + emp_id + ", password=" + password + ",  firstName=" + first_name
 				+ ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", date_of_birth="
 				+ date_of_birth + ", mobile=" + mobile + ", aadhar=" + aadhar + ", pan_no=" + pan_no + ", address="
 				+ address + ", joining_date=" + joining_date + ", account_no=" + account_no + ", designation="
 				+ designation + ", ifsc_code=" + ifsc_code + ", bank_name=" + bank_name + ", blood_group=" + blood_group
 				+ "]";
 	}
+
+//	private String mle_id;
+//
+//	public String getMle_id() {
+//		return mle_id;
+//	}
+//
+//
+//
+//	public void setMle_id(String mle_id) {
+//		this.mle_id = mle_id;
+//	}
+
+
+
+//	public String getFirst_name() {
+//		return first_name;
+//	}
+//
+//
+//
+//	public void setFirst_name(String first_name) {
+//		this.first_name = first_name;
+//	}
 
 //	private String image;
 //

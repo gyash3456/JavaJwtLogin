@@ -47,9 +47,9 @@ public class ForgotController {
 	}
 	
 
-	@PostMapping("/forgot-password")
+	@PostMapping("/forgot")
 	public String forgotPassword(@RequestParam String username) {
-
+		System.out.println("in forgot");
 		String response = forgotService.forgotPassword(username);
 
 		if (!response.startsWith("Invalid")) {
