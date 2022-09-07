@@ -52,47 +52,58 @@ public class empServiceImpl implements empService {
 	@Override
 	public empDto createEmployee(empDto empDto1)
 	{  
-//		Configuration cfg = new Configuration();
-//		cfg.configure ();
-//		SessionFactory factory=cfg.buildSessionFactory();		
 		
-		String user_id=empDto1.getEmail();
-		String user_pass= empDto1.getPassword();
-
-	     Employee savedEmployee;
-	
-		Employee employee=this.dtoToEmployee(empDto1);
+		Employee employee= new Employee();
+		employee.setFirstName(empDto1.getfirst_name());
+		employee.setEmail(empDto1.getEmail());
+		employee.setPassword(empDto1.getPassword());
+		employee.setEmail(empDto1.getEmail());
+		employee.setGender(empDto1.getGender());
+		employee.setDate_of_birth(empDto1.getDate_of_birth());
+		employee.setMobile(empDto1.getMobile());
+		employee.setAadhar(empDto1.getAadhar());
+		employee.setPan_no(empDto1.getPan_no());
+		employee.setAddress(empDto1.getAddress());
+		employee.setJoning_date(empDto1.getJoining_date());
+		employee.setAccount_no(empDto1.getAccount_no());
+		employee.setIfsc_code(empDto1.getIfsc_code());
+		employee.setBank_name(empDto1.getBank_name());
+		employee.setDesignation(empDto1.getDesignation());
+		employee.setBlood_group(empDto1.getBlood_group());
+		   
+		empRepo.saveAndFlush(employee);
 		
+		User user=new User();
+		user.setUsername(empDto1.getEmail());
+		//user.setPassword(empDto1.getPassword());
+	user.setPassword(passwordEncoder.getPasswordEncoder().encode(empDto1.getPassword()));
+		user.setEmployee(employee);
+		userRepo.save(user);
 		
-		 Optional<Employee> emp=this.empRepo.findByEmail(user_id);
-	
-		if(emp.isPresent()) {
-			throw(new ResourceAlreadyPresentException("Employee",user_id));
+		empDto empDto= new empDto();
+		empDto.setEmp_id(employee.getEmp_id());
+		empDto1.setPassword(employee.getPassword());
+	    empDto1.setfirst_name(employee.getFirstName());
+		//empDto1.setLastName(employee.getLastName());
+	    
+	    empDto1.setEmail(employee.getEmail());
+	    empDto1.setGender(employee.getGender());
+	    empDto1.setDate_of_birth(employee.getDate_of_birth());
+	    empDto1.setMobile(employee.getMobile());
+	    empDto1.setAadhar(employee.getAadhar());
+	    empDto1.setPan_no(employee.getPan_no());
+	    empDto1.setAddress(employee.getAddress());
+	    empDto1.setJoining_date(employee.getJoining_date());
+	    empDto1.setAccount_no(employee.getAccount_no());
+	    empDto1.setIfsc_code(employee.getIfsc_code());
+	    empDto1.setBank_name(employee.getBank_name());
+	    empDto1.setDesignation(employee.getDesignation());
+	    empDto1.setBlood_group(employee.getBlood_group());
+	   
 			
-		}
-		else {
-			//savedEmployee =empRepo.save(employee);
-			this.user.setUsername(user_id);
-            this.user.setPassword(passwordEncoder.getPasswordEncoder().encode(user_pass));
-           // this.user.setEmployee(savedEmployee);
-            this.userRepo.save(this.user);
-            employee.setUser(this.user);
-          //  employee.setMle_id("MLE-00"+empDto1.getEmp_id());
-            
-           
-            
-//            employee.setImage(file.getOriginalFilename());
-//            File savefile= new ClassPathResource("static/img").getFile();
-//            
-//           Path path= Paths.get(savefile.getAbsolutePath()+File.separator+file.getOriginalFilename());
-//            
-//            Files.copy(file.getInputStream(),l, null);
-           savedEmployee =empRepo.save(employee);
-            
-            
-		}		
-		return employeetoDto(savedEmployee);
+		return empDto1;
 		
+	
 		
 	}
 	
@@ -151,8 +162,8 @@ public class empServiceImpl implements empService {
 	{
 		Employee emp  =new Employee();
 		emp.setEmp_id(empDto1.getEmp_id());
-	//emp.setMle_id("MLE-00"+empDto1.getEmp_id());
-	System.out.println(empDto1.getEmp_id());
+	
+	
 		emp.setFirstName(empDto1.getfirst_name());
 		//emp.setLastName(empDto1.getLastName());
 	    emp.setPassword(empDto1.getPassword());
@@ -177,10 +188,9 @@ public class empServiceImpl implements empService {
 	{
 		empDto empDto1 =new empDto();
 		empDto1.setEmp_id(emp.getEmp_id());	
-	//	empDto1.setMle_id("MLE-00"+emp.getEmp_id());
 	    empDto1.setPassword(emp.getPassword());
 	    empDto1.setfirst_name(emp.getFirstName());
-		empDto1.setLastName(emp.getLastName());
+	//	empDto1.setLastName(emp.getLastName());
 	    
 	    empDto1.setEmail(emp.getEmail());
 	    empDto1.setGender(emp.getGender());

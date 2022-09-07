@@ -37,7 +37,7 @@ public class empDto {
 	
 	private String first_name;
 	
-	private String lastName;
+//	private String lastName;
 	private String email;
 	private String gender;
 	
@@ -56,13 +56,13 @@ public class empDto {
 		this.first_name = first_name;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+//	public String getLastName() {
+//		return lastName;
+//	}
+//
+//	public void setLastName(String lastName) {
+//		this.lastName = lastName;
+//	}
 
 	public String getEmail() {
 		return email;

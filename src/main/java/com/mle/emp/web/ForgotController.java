@@ -53,14 +53,16 @@ public class ForgotController {
 		String response = forgotService.forgotPassword(username);
 
 		if (!response.startsWith("Invalid")) {
-			response = "http://localhost:8080/api/auth/reset-password?token=" + response;
+//			response = "http://localhost:8080/api/auth/reset-password?token=" + response;
+			response = "Mail sent successfully "; 
 		}
 		return response;
 	}
 
-	@PutMapping("/reset-password")
+	@PostMapping("/reset-password")
 	public String resetPassword(@RequestParam String token,
 			@RequestParam String password) {
+		System.out.println("In reset");
 
 		return forgotService.resetPassword(token, password);
 	}

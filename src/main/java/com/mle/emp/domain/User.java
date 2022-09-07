@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,6 +28,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "users")
 public class User implements UserDetails{
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(id, other.id);
+	}
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String username;
@@ -68,17 +84,17 @@ public class User implements UserDetails{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-//	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
-//	@JoinColumn(name="EMP_ID",insertable=false,updatable=false)
-//	private Employee employee;
-//	
-//	
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="emp_id",referencedColumnName = "emp_id")
+	private Employee employee;
+	
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 	public Long getId() {
 		return id;
 	}

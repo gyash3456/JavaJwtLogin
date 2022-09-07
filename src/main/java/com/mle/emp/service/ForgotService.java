@@ -37,6 +37,7 @@ public class ForgotService {
 				.ofNullable(UserRepository.findByusername(username));
 
 		if (!userOptional.isPresent()) {
+			System.out.println("ytytytty");
 			return "Invalid username id.";
 		}
 

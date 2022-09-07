@@ -1,8 +1,11 @@
 package com.mle.emp.domain;
 
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +29,30 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Table(uniqueConstraints = @UniqueConstraint(name="uc_email",columnNames = ("email")))
+//@Table(uniqueConstraints = @UniqueConstraint(name="uc_email",columnNames = ("email")))
+@Table
 public class Employee {
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(emp_id);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Objects.equals(emp_id, other.emp_id);
+	}
+
+
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Integer emp_id;
@@ -44,8 +68,8 @@ public class Employee {
 	@Column(name = "first_name")
 	private String first_name;
 	
-	@Column(name = "last_name")
-	private String lastName;
+//	@Column(name = "last_name")
+//	private String lastName;
 	
 	//@UniqueConstraint(columnNames =  "email" )
 	@Column(name = "email")
@@ -148,15 +172,15 @@ public class Employee {
 
 
 
-	public String getLastName() {
-		return lastName;
-	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+//	public String getLastName() {
+//		return lastName;
+//	}
+//
+//
+//
+//	public void setLastName(String lastName) {
+//		this.lastName = lastName;
+//	}
 
 
 
@@ -312,19 +336,19 @@ public class Employee {
 	}
 
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL,mappedBy ="employee",fetch = FetchType.LAZY )
 	private User user;
-
-
-	public User getUser() {
-		return user;
-	}
-
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//
+//
+//	public User getUser() {
+//		return user;
+//	}
+//
+//
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 
 	
 
@@ -332,7 +356,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [emp_id=" + emp_id + ", password=" + password + ",  firstName=" + first_name
-				+ ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", date_of_birth="
+				+ ", email=" + email + ", gender=" + gender + ", date_of_birth="
 				+ date_of_birth + ", mobile=" + mobile + ", aadhar=" + aadhar + ", pan_no=" + pan_no + ", address="
 				+ address + ", joining_date=" + joining_date + ", account_no=" + account_no + ", designation="
 				+ designation + ", ifsc_code=" + ifsc_code + ", bank_name=" + bank_name + ", blood_group=" + blood_group
