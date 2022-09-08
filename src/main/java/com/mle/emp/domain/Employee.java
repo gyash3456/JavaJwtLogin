@@ -30,7 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 
 //@Table(uniqueConstraints = @UniqueConstraint(name="uc_email",columnNames = ("email")))
-@Table
+
 public class Employee {
 	
 	@Override

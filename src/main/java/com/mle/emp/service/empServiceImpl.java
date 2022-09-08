@@ -52,27 +52,42 @@ public class empServiceImpl implements empService {
 	@Override
 	public empDto createEmployee(empDto empDto1)
 	{  
-		
-		Employee employee= new Employee();
-		employee.setFirstName(empDto1.getfirst_name());
-		employee.setEmail(empDto1.getEmail());
-		employee.setPassword(empDto1.getPassword());
-		employee.setEmail(empDto1.getEmail());
-		employee.setGender(empDto1.getGender());
-		employee.setDate_of_birth(empDto1.getDate_of_birth());
-		employee.setMobile(empDto1.getMobile());
-		employee.setAadhar(empDto1.getAadhar());
-		employee.setPan_no(empDto1.getPan_no());
-		employee.setAddress(empDto1.getAddress());
-		employee.setJoning_date(empDto1.getJoining_date());
-		employee.setAccount_no(empDto1.getAccount_no());
-		employee.setIfsc_code(empDto1.getIfsc_code());
-		employee.setBank_name(empDto1.getBank_name());
-		employee.setDesignation(empDto1.getDesignation());
-		employee.setBlood_group(empDto1.getBlood_group());
-		   
-		empRepo.saveAndFlush(employee);
-		
+		 String user_id=empDto1.getEmail();
+		Employee savedEmployee;
+		//System.out.println(user_id);
+			//Employee employee1=this.dtoToEmployee(empDto1);
+			//Boolean x=false;
+			
+			 Optional<Employee> emp=this.empRepo.findByEmail(user_id);
+			// System.out.println(emp);
+			if(emp.isPresent())
+			{
+				throw(new ResourceAlreadyPresentException("Employee",user_id));
+				
+			}
+			else 
+			{
+					
+				Employee employee= new Employee();
+				employee.setFirstName(empDto1.getfirst_name());
+				employee.setEmail(empDto1.getEmail());
+				employee.setPassword(empDto1.getPassword());
+				employee.setEmail(empDto1.getEmail());
+				employee.setGender(empDto1.getGender());
+				employee.setDate_of_birth(empDto1.getDate_of_birth());
+				employee.setMobile(empDto1.getMobile());
+				employee.setAadhar(empDto1.getAadhar());
+				employee.setPan_no(empDto1.getPan_no());
+				employee.setAddress(empDto1.getAddress());
+				employee.setJoning_date(empDto1.getJoining_date());
+				employee.setAccount_no(empDto1.getAccount_no());
+				employee.setIfsc_code(empDto1.getIfsc_code());
+				employee.setBank_name(empDto1.getBank_name());
+				employee.setDesignation(empDto1.getDesignation());
+				employee.setBlood_group(empDto1.getBlood_group());
+				   
+				empRepo.saveAndFlush(employee);
+				
 		User user=new User();
 		user.setUsername(empDto1.getEmail());
 		//user.setPassword(empDto1.getPassword());
@@ -100,7 +115,7 @@ public class empServiceImpl implements empService {
 	    empDto1.setDesignation(employee.getDesignation());
 	    empDto1.setBlood_group(employee.getBlood_group());
 	   
-			
+			}	
 		return empDto1;
 		
 	
